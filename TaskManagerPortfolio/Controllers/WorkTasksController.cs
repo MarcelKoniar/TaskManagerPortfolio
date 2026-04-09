@@ -29,7 +29,7 @@ namespace TaskManagerPortfolio.Controllers
         public async Task<IActionResult> Add([FromBody] WorkTaskDTO workTask)
         {
             if (workTask == null) return BadRequest();
-            await _workTaskService.AddAsync(workTask);
+            workTask.Id = await _workTaskService.AddAsync(workTask);
 
             // Return Created pointing to the GetById endpoint. The DTO's Id may be set by the repository/EF.
             return CreatedAtAction(nameof(GetById), new { id = workTask.Id }, workTask);
@@ -40,6 +40,22 @@ namespace TaskManagerPortfolio.Controllers
         {
             var list = await _workTaskService.GetAllAsync();
             return Ok(list);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _workTaskService.DeleteAsync(id);
+            return NoContent();
+        }
+
+        [HttpPatch()]
+        public async Task<IActionResult> Update([FromBody] WorkTaskDTO workTask)
+        {
+            if (workTask == null) return BadRequest();
+
+            await _workTaskService.UpdateAsync(workTask);
+            return NoContent();
         }
     }
 }
