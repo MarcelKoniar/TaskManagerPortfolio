@@ -25,13 +25,13 @@ namespace Application.Services
         public async Task<WorkTaskDTO?> GetByIdAsync(Guid id)
         {
             var data = await _workTaskRepository.GetByIdAsync(id);
-            return new WorkTaskDTO { 
+            return data !=null ? new WorkTaskDTO { 
                 Title = data.Title,
                 CompletedAt = data.CompletedAt,
                 Description = data.Description,
                 Id = data.Id,
                 Status = data.Status
-            };
+            }: null;
         }
 
         public async Task<Guid> AddAsync(WorkTaskDTO workTaskDTO)

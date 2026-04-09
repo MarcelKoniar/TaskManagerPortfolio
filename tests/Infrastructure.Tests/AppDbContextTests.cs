@@ -44,11 +44,6 @@ namespace Infrastructure.Tests
 
                 db.WorkTasks.Add(task);
                 db.SaveChanges();
-            }
-
-            using (var scope = _provider.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
                 var tasks = db.WorkTasks.ToList();
 

@@ -1,5 +1,6 @@
 using Infrastructure;
 using Application.Extensions;
+using WebApi.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
+
+
+app.UseMiddleware<ErrorHandler>();
+
+//app.mapp();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

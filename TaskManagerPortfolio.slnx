@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Tests/">
     <Project Path="tests/Infrastructure.Tests/Infrastructure.Tests.csproj" />
+    <Project Path="tests/WebApi.Tests/WebApi.Tests.csproj" />
   </Folder>
   <Project Path="Application/Application.csproj" Id="f368fcaa-6cfc-4fea-8d89-6f55d2676dc0" />
   <Project Path="Domain/Domain.csproj" Id="dbdf9c52-0843-4b57-b199-5893812281cb" />
