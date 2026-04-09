@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Application.Services;
 
-namespace Application
+namespace Application.Extensions
 {
     public static class DependencyInjection
     {

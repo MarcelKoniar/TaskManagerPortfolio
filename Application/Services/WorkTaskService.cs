@@ -1,11 +1,13 @@
 ﻿using Application.DTO;
+using Application.Extensions;
 using Application.Interfaces;
+using Domain.EntityModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using System.Linq;
-using Domain.EntityModels;
 
 namespace Application.Services
 {
@@ -44,9 +46,40 @@ namespace Application.Services
             return created.Id;
         }
 
-        public async Task<IReadOnlyList<WorkTaskDTO>> GetAllAsync()
+        public async Task<IReadOnlyList<WorkTaskDTO>> GetAllAsync(GetWorkTaskRequest? request)
         {
-            var data = await _workTaskRepository.GetAllAsync();
+            Expression<Func<WorkTask, bool>> filter = u => true;
+            if (request != null)
+            {
+                if (!String.IsNullOrEmpty(request.Title))
+                {
+                    filter = filter.And(u => u.Title.ToUpper().Contains(request.Title.ToUpper()));
+                }
+                if (!String.IsNullOrEmpty(request.Description))
+                {
+                    filter = filter.And(u => u.Description.ToUpper().Contains(request.Description.ToUpper()));
+                }
+                if (request.Status != null)
+                {
+                    filter = filter.And(u => u.Status == request.Status);
+                }
+                if (request.Status != null)
+                {
+                    filter = filter.And(u => u.Status == request.Status);
+                }
+
+                if (request.CompletedAtFrom.HasValue)
+                {
+                    filter = filter.And(u => u.CreatedAt >= request.CompletedAtFrom.Value);
+                }
+
+                if (request.CompletedAtTo.HasValue)
+                {
+                    filter = filter.And(u => u.CreatedAt >= request.CompletedAtTo.Value);
+                }
+            }
+
+            var data = await _workTaskRepository.GetWhereAsync(filter);
             return data.Select(x => new WorkTaskDTO { 
                 Id = x.Id,
                 Status = x.Status,

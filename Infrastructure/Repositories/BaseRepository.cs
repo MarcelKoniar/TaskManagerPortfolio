@@ -24,11 +24,11 @@ namespace Infrastructure.Repositories
             return dbContext.Set<T>().Where(x => !x.Deleted);
         }
 
-        public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate)
+        public async Task<IQueryable<T>> GetWhereAsync(Expression<Func<T, bool>> predicate)
         {
             var dbContext = DbContext;
 
-            return await dbContext.Set<T>().Where(predicate).ToListAsync();
+            return dbContext.Set<T>().Where(predicate);
         }
 
         //public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeString = null, bool disableTracking = true)

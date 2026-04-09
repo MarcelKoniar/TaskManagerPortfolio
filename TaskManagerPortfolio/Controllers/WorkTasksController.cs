@@ -36,9 +36,9 @@ namespace TaskManagerPortfolio.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] GetWorkTaskRequest getWorkTaskRequest)
         {
-            var list = await _workTaskService.GetAllAsync();
+            var list = await _workTaskService.GetAllAsync(getWorkTaskRequest);
             return Ok(list);
         }
 
