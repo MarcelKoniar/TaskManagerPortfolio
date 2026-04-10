@@ -31,7 +31,7 @@ builder.WebHost.ConfigureKestrel(options =>
 
 
 
-// add application & infra services so IWorkTaskService is resolvable
+// add application & infra services so IToDoTaskService is resolvable
 builder.Services.AddApplication();      // ensure Application.DependencyInjection is available
 builder.Services.AddInfrastructure();   // ensure repository + db are registered
 
@@ -40,7 +40,7 @@ builder.Services.AddGrpc();
 
 var app = builder.Build();
 
-app.MapGrpcService<WorkTaskGrpcService>();
+app.MapGrpcService<ToDoTaskGrpcService>();
 app.MapGet("/", () => "gRPC service up");
 
 app.Run();

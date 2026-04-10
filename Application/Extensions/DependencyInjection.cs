@@ -12,7 +12,7 @@ namespace Application.Extensions
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
 
-            services.AddScoped<IWorkTaskService, WorkTaskService>();
+            services.AddScoped<IToDoTaskService, ToDoTaskService>();
 
             return services;
         }

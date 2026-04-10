@@ -8,22 +8,22 @@ using System.Text;
 
 namespace Infrastructure.Repositories
 {
-    public class WorkTaskRepository: BaseRepository<WorkTask>, IWorkTaskRepository
+    public class ToDoTaskRepository: BaseRepository<ToDoTask>, IToDoTaskRepository
     {
 
         //private readonly AppDbContext _dbContext;
 
-        //public WorkTaskRepository(AppDbContext dbContext)
+        //public ToDoTaskRepository(AppDbContext dbContext)
         //{
         //    _dbContext = dbContext;
         //    _dbContext.Database.EnsureCreated();
         //}
 
-        //public async Task<WorkTaskDTO?> GetByIdAsync(Guid id)
+        //public async Task<ToDoTaskDTO?> GetByIdAsync(Guid id)
         //{
-        //    var user = await _dbContext.WorkTasks.FirstOrDefaultAsync(x => x.Id == id);
+        //    var user = await _dbContext.ToDoTasks.FirstOrDefaultAsync(x => x.Id == id);
 
-        //    return user == null ? null : new WorkTaskDTO
+        //    return user == null ? null : new ToDoTaskDTO
         //    {
         //        Id = user.Id,
         //        Title = user.Title,
@@ -33,9 +33,9 @@ namespace Infrastructure.Repositories
         //    };
         //}
 
-        //public async Task AddAsync(WorkTaskDTO user)
+        //public async Task AddAsync(ToDoTaskDTO user)
         //{
-        //    await _dbContext.WorkTasks.AddAsync(new WorkTask
+        //    await _dbContext.ToDoTasks.AddAsync(new ToDoTask
         //    {   Id = Guid.NewGuid(),             
         //        Title = user.Title,
         //        Description = user.Description, 
@@ -46,9 +46,9 @@ namespace Infrastructure.Repositories
         //    await _dbContext.SaveChangesAsync();
         //}
 
-        //public async Task<IQueryable<WorkTaskDTO?>> GetAll()
+        //public async Task<IQueryable<ToDoTaskDTO?>> GetAll()
         //{
-        //    return _dbContext.WorkTasks.Where(x => !x.Deleted).Select(x => new WorkTaskDTO
+        //    return _dbContext.ToDoTasks.Where(x => !x.Deleted).Select(x => new ToDoTaskDTO
         //    {
         //        Id = x.Id,
         //        CompletedAt = x.CompletedAt,
@@ -57,7 +57,7 @@ namespace Infrastructure.Repositories
         //        Title = x.Title
         //    });
         //}
-        public WorkTaskRepository(AppDbContext dbContext) : base(dbContext)
+        public ToDoTaskRepository(AppDbContext dbContext) : base(dbContext)
         {
         }
 

@@ -28,7 +28,7 @@ namespace Infrastructure
                 //     configuration.GetConnectionString("Default"));
             });
 
-            services.AddScoped<IWorkTaskRepository, WorkTaskRepository>();
+            services.AddScoped<IToDoTaskRepository, ToDoTaskRepository>();
 
             return services;
         }

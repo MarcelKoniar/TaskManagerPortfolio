@@ -8,53 +8,53 @@ namespace TaskManagerPortfolio.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WorkTasksController : ControllerBase
+    public class ToDoTasksController : ControllerBase
     {
-        private readonly IWorkTaskService _workTaskService;
+        private readonly IToDoTaskService _ToDoTaskService;
 
-        public WorkTasksController(IWorkTaskService workTaskService)
+        public ToDoTasksController(IToDoTaskService ToDoTaskService)
         {
-            _workTaskService = workTaskService;
+            _ToDoTaskService = ToDoTaskService;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var dto = await _workTaskService.GetByIdAsync(id);
+            var dto = await _ToDoTaskService.GetByIdAsync(id);
             if (dto is null) return NotFound();
             return Ok(dto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] WorkTaskDTO workTask)
+        public async Task<IActionResult> Add([FromBody] ToDoTaskDTO ToDoTask)
         {
-            if (workTask == null) return BadRequest();
-            workTask.Id = await _workTaskService.AddAsync(workTask);
+            if (ToDoTask == null) return BadRequest();
+            ToDoTask.Id = await _ToDoTaskService.AddAsync(ToDoTask);
 
             // Return Created pointing to the GetById endpoint. The DTO's Id may be set by the repository/EF.
-            return CreatedAtAction(nameof(GetById), new { id = workTask.Id }, workTask);
+            return CreatedAtAction(nameof(GetById), new { id = ToDoTask.Id }, ToDoTask);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] GetWorkTaskRequest getWorkTaskRequest)
+        public async Task<IActionResult> GetAll([FromQuery] GetToDoTaskRequest getToDoTaskRequest)
         {
-            var list = await _workTaskService.GetAllAsync(getWorkTaskRequest);
+            var list = await _ToDoTaskService.GetAllAsync(getToDoTaskRequest);
             return Ok(list);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _workTaskService.DeleteAsync(id);
+            await _ToDoTaskService.DeleteAsync(id);
             return NoContent();
         }
 
         [HttpPatch()]
-        public async Task<IActionResult> Update([FromBody] WorkTaskDTO workTask)
+        public async Task<IActionResult> Update([FromBody] ToDoTaskDTO ToDoTask)
         {
-            if (workTask == null) return BadRequest();
+            if (ToDoTask == null) return BadRequest();
 
-            await _workTaskService.UpdateAsync(workTask);
+            await _ToDoTaskService.UpdateAsync(ToDoTask);
             return NoContent();
         }
     }

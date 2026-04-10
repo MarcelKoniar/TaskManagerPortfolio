@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Application.DTO
 {
-    public class GetWorkTaskRequest
+    public class GetToDoTaskRequest
     {
         public string? Title { get; set; }
         public string? Description { get; set; }

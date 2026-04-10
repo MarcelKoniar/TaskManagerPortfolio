@@ -8,17 +8,17 @@ builder.Services.AddGrpc();
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    //options.ListenLocalhost(5001, listenOptions =>
-    //{
-    //    listenOptions.UseHttps(); // ensure HTTPS if client uses https://
-    //    listenOptions.Protocols = HttpProtocols.Http2;
-    //});
-
-    options.ListenAnyIP(5001, o =>
+    options.ListenLocalhost(5001, listenOptions =>
     {
-        o.UseHttps(); // ensure HTTPS if client uses https://
-        o.Protocols = HttpProtocols.Http2;
+        listenOptions.UseHttps(); // ensure HTTPS if client uses https://
+        listenOptions.Protocols = HttpProtocols.Http2;
     });
+
+    //options.ListenAnyIP(5001, o =>
+    //{
+    //    o.UseHttps(); // ensure HTTPS if client uses https://
+    //    o.Protocols = HttpProtocols.Http2;
+    //});
 
 });
 

@@ -11,21 +11,21 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class WorkTaskService : IWorkTaskService
+    public class ToDoTaskService : IToDoTaskService
     {
 
-        private readonly IWorkTaskRepository _workTaskRepository;
+        private readonly IToDoTaskRepository _ToDoTaskRepository;
 
-        public WorkTaskService(IWorkTaskRepository workTaskRepository)
+        public ToDoTaskService(IToDoTaskRepository ToDoTaskRepository)
         {
-            _workTaskRepository = workTaskRepository ?? throw new ArgumentNullException(nameof(workTaskRepository));
+            _ToDoTaskRepository = ToDoTaskRepository ?? throw new ArgumentNullException(nameof(ToDoTaskRepository));
         }
 
 
-        public async Task<WorkTaskDTO?> GetByIdAsync(Guid id)
+        public async Task<ToDoTaskDTO?> GetByIdAsync(Guid id)
         {
-            var data = await _workTaskRepository.GetByIdAsync(id);
-            return data !=null ? new WorkTaskDTO { 
+            var data = await _ToDoTaskRepository.GetByIdAsync(id);
+            return data !=null ? new ToDoTaskDTO { 
                 Title = data.Title,
                 CompletedAt = data.CompletedAt,
                 Description = data.Description,
@@ -34,21 +34,21 @@ namespace Application.Services
             }: null;
         }
 
-        public async Task<Guid> AddAsync(WorkTaskDTO workTaskDTO)
+        public async Task<Guid> AddAsync(ToDoTaskDTO ToDoTaskDTO)
         {
-            var newEntity = new WorkTask
+            var newEntity = new ToDoTask
             {
-                Title = workTaskDTO.Title,
-                Description = workTaskDTO.Description,
-                Status = workTaskDTO.Status
+                Title = ToDoTaskDTO.Title,
+                Description = ToDoTaskDTO.Description,
+                Status = ToDoTaskDTO.Status
             };
-            var created = await _workTaskRepository.AddAsync(newEntity);
+            var created = await _ToDoTaskRepository.AddAsync(newEntity);
             return created.Id;
         }
 
-        public async Task<IReadOnlyList<WorkTaskDTO>> GetAllAsync(GetWorkTaskRequest? request)
+        public async Task<IReadOnlyList<ToDoTaskDTO>> GetAllAsync(GetToDoTaskRequest? request)
         {
-            Expression<Func<WorkTask, bool>> filter = u => true;
+            Expression<Func<ToDoTask, bool>> filter = u => true;
             if (request != null)
             {
                 if (!String.IsNullOrEmpty(request.Title))
@@ -79,8 +79,8 @@ namespace Application.Services
                 }
             }
 
-            var data = await _workTaskRepository.GetWhereAsync(filter);
-            return data.Select(x => new WorkTaskDTO { 
+            var data = await _ToDoTaskRepository.GetWhereAsync(filter);
+            return data.Select(x => new ToDoTaskDTO { 
                 Id = x.Id,
                 Status = x.Status,
                 CompletedAt = x.CompletedAt,
@@ -91,20 +91,20 @@ namespace Application.Services
 
         public async Task DeleteAsync(Guid id)
         {
-            await _workTaskRepository.DeleteByIdAsync(id);
+            await _ToDoTaskRepository.DeleteByIdAsync(id);
         }
 
-        public Task UpdateAsync(WorkTaskDTO workTaskDTO)
+        public Task UpdateAsync(ToDoTaskDTO ToDoTaskDTO)
         {
-            var entity = new WorkTask
+            var entity = new ToDoTask
             {
-                Id = workTaskDTO.Id,
-                Title = workTaskDTO.Title,
-                Description = workTaskDTO.Description,
-                Status = workTaskDTO.Status,
-                CompletedAt = workTaskDTO.CompletedAt
+                Id = ToDoTaskDTO.Id,
+                Title = ToDoTaskDTO.Title,
+                Description = ToDoTaskDTO.Description,
+                Status = ToDoTaskDTO.Status,
+                CompletedAt = ToDoTaskDTO.CompletedAt
             };
-            return _workTaskRepository.UpdateAsync(entity);
+            return _ToDoTaskRepository.UpdateAsync(entity);
         }
     }
 }

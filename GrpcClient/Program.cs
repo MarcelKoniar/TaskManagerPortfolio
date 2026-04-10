@@ -2,8 +2,8 @@ using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
-using GrpcService.Protos;
-using static GrpcService.Protos.WorkTaskService;
+using GrpcService;
+using static GrpcService.ToDoTaskService;
 
 namespace GrpcClientSample
 {
@@ -17,8 +17,8 @@ namespace GrpcClientSample
             // Create a channel
             using var channel = GrpcChannel.ForAddress(address);
 
-            // Generated client type may be top-level `WorkTaskServiceClient` depending on proto generation settings
-            var client = new WorkTaskServiceClient(channel);
+            // Generated client type may be top-level `ToDoTaskServiceClient` depending on proto generation settings
+            var client = new ToDoTaskServiceClient(channel);
 
             // Unary GetAll
             var getAllRequest = new GetAllRequest { Title = "" };

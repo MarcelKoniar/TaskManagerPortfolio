@@ -29,23 +29,23 @@ namespace Infrastructure.Tests
         }
 
         [Fact]
-        public void CanInsertAndQueryWorkTask()
+        public void CanInsertAndQueryToDoTask()
         {
             using (var scope = _provider.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-                var task = new WorkTask
+                var task = new ToDoTask
                 {
                     Title = "Test task",
                     Description = "Description",
                     Deleted = false
                 };
 
-                db.WorkTasks.Add(task);
+                db.ToDoTasks.Add(task);
                 db.SaveChanges();
 
-                var tasks = db.WorkTasks.ToList();
+                var tasks = db.ToDoTasks.ToList();
 
                 Assert.Single(tasks);
                 Assert.Equal("Test task", tasks[0].Title);

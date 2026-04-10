@@ -12,13 +12,13 @@ namespace Infrastructure
         { 
         }
 
-        public DbSet<WorkTask> WorkTasks => Set<WorkTask>();
+        public DbSet<ToDoTask> ToDoTasks => Set<ToDoTask>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<WorkTask>(entity =>
+            modelBuilder.Entity<ToDoTask>(entity =>
             {
                 // Primary key
                 entity.HasKey(e => e.Id);

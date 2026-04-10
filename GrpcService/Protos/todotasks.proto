@@ -1,17 +1,17 @@
 syntax = "proto3";
 
-option csharp_namespace = "GrpcService.Protos";
+option csharp_namespace = "GrpcService";
 
 package taskmanager;
 
 // Service definition (unary + optional server-stream)
-service WorkTaskService {
+service ToDoTaskService {
   rpc GetAll(GetAllRequest) returns (GetAllResponse);
-  rpc StreamAll(GetAllRequest) returns (stream WorkTask);
+  rpc StreamAll(GetAllRequest) returns (stream ToDoTask);
 }
 
 // Proto message exposed over gRPC
-message WorkTask {
+message ToDoTask {
   string id = 1;
   string title = 2;
   string description = 3;
@@ -30,6 +30,6 @@ message GetAllRequest {
 
 // Unary response with repeated tasks
 message GetAllResponse {
-  repeated WorkTask tasks = 1;
+  repeated ToDoTask tasks = 1;
 }
 

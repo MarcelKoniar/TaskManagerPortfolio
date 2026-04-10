@@ -19,15 +19,15 @@ namespace WebApi.Tests
     public class EndpointTests
     {
         [Fact]
-        public async Task CanAddWorkTask()
+        public async Task CanAddToDoTask()
         {
 
             // Arrange
-            var serviceMock = new Mock<IWorkTaskService>();
+            var serviceMock = new Mock<IToDoTaskService>();
             serviceMock.Setup(s => s.GetByIdAsync(It.IsAny<Guid>()))
-                       .ReturnsAsync((WorkTaskDTO)null);
+                       .ReturnsAsync((ToDoTaskDTO)null);
 
-            var task = new WorkTaskDTO
+            var task = new ToDoTaskDTO
             {
                 Title = "Test task",
                 Description = "Description test",
@@ -35,14 +35,14 @@ namespace WebApi.Tests
             };
 
 
-            var controller = new WorkTasksController(serviceMock.Object);
+            var controller = new ToDoTasksController(serviceMock.Object);
 
             // Act
             var result = await controller.Add(task);
 
             // Assert
             var created = Assert.IsType<CreatedAtActionResult>(result);
-            var user = Assert.IsType<WorkTaskDTO>(created.Value);
+            var user = Assert.IsType<ToDoTaskDTO>(created.Value);
             Assert.Equal("Test task", user.Title);
 
         }
