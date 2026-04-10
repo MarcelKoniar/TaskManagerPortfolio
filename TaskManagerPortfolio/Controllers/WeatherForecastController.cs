@@ -14,9 +14,9 @@ namespace TaskManagerPortfolio.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            throw new UnauthorizedAccessException();
+            //throw new UnauthorizedAccessException();
 
-            throw new Exception("This is a test exception for demonstration purposes.");
+            //throw new Exception("This is a test exception for demonstration purposes.");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
