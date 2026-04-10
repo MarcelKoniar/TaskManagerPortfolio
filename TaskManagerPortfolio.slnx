@@ -1,12 +1,12 @@
 <Solution>
   <Folder Name="/Presentation/">
-    <Project Path="GrpcClient/GrpcClient.csproj" Id="58da2d94-e2a2-49da-bd8e-ce81f9b4b0d3" />
-    <Project Path="GrpcService/GrpcService.csproj" Id="c9a4c868-b7fc-4869-90ea-d08947f02663" />
-    <Project Path="TaskManagerPortfolio/WebApi.csproj" />
+    <Project Path="Presentation/GrpcClient/GrpcClient.csproj" Id="58da2d94-e2a2-49da-bd8e-ce81f9b4b0d3" />
+    <Project Path="Presentation/GrpcService/GrpcService.csproj" Id="c9a4c868-b7fc-4869-90ea-d08947f02663" />
+    <Project Path="Presentation/TaskManagerPortfolio/WebApi.csproj" />
   </Folder>
   <Folder Name="/Tests/">
-    <Project Path="tests/Infrastructure.Tests/Infrastructure.Tests.csproj" />
-    <Project Path="tests/WebApi.Tests/WebApi.Tests.csproj" />
+    <Project Path="Tests/Infrastructure.Tests/Infrastructure.Tests.csproj" />
+    <Project Path="Tests/WebApi.Tests/WebApi.Tests.csproj" />
   </Folder>
   <Project Path="Application/Application.csproj" Id="f368fcaa-6cfc-4fea-8d89-6f55d2676dc0" />
   <Project Path="Domain/Domain.csproj" Id="dbdf9c52-0843-4b57-b199-5893812281cb" />
