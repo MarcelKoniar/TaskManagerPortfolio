@@ -1,41 +1,22 @@
-using System;
-using System.Threading.Tasks;
-using Grpc.Core;
-using Grpc.Net.Client;
-using GrpcService;
-using static GrpcService.ToDoTaskService;
+﻿using Grpc.Net.Client;
+using GrpcGreeterClient;
+using GrpcToDoServiceClient;
 
-namespace GrpcClientSample
-{
-    internal class Program
+// The port number must match the port of the gRPC server.
+using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+//var client = new Greeter.GreeterClient(channel);
+//var reply = await client.SayHelloAsync(
+//    new HelloRequest { Name = "GreeterClient" });
+
+var client = new ToDoTaskService.ToDoTaskServiceClient(channel);
+var reply = await client.AddAsync(
+    new AddRequest
     {
-        static async Task Main(string[] args)
-        {
-            // Ensure the server is running (GrpcService project)
-            var address = args.Length > 0 ? args[0] : "https://localhost:5001";
+       Title = "Test Task",
+       Description = "This is a test task",
+       Status = Status.Todo
+    });
 
-            // Create a channel
-            using var channel = GrpcChannel.ForAddress(address);
-
-            // Generated client type may be top-level `ToDoTaskServiceClient` depending on proto generation settings
-            var client = new ToDoTaskServiceClient(channel);
-
-            // Unary GetAll
-            var getAllRequest = new GetAllRequest { Title = "" };
-            var response = await client.GetAllAsync(getAllRequest);
-
-            Console.WriteLine($"Received {response.Tasks.Count} tasks from gRPC");
-            foreach (var t in response.Tasks)
-            {
-                Console.WriteLine($"{t.Id} {t.Title} {t.Status} {t.CompletedAt}");
-            }
-
-            // Streaming example
-            using var call = client.StreamAll(new GetAllRequest());
-            await foreach (var task in call.ResponseStream.ReadAllAsync())
-            {
-                Console.WriteLine($"stream: {task.Id} {task.Title}");
-            }
-        }
-    }
-}
+Console.WriteLine("Task was created with Id: " + reply.Id);
+Console.WriteLine("Press any key to exit...");
+Console.ReadKey();
