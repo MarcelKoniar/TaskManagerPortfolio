@@ -1,0 +1,70 @@
+syntax = "proto3";
+package taskmanager;
+
+option csharp_namespace = "GrpcToDoServiceClient";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+message ToDoTask {
+  // GUID as string (use consistent formatting on server/client)
+	string id = 1;
+	string title = 2;
+	string description = 3;
+	Status status = 4;
+}
+
+enum Status {
+  STATUS_UNKNOWN = 0;
+  TODO = 1;
+  IN_PROGRESS = 2;
+  DONE = 3;
+}
+
+message GetAllRequest {
+
+  //google.protobuf.Timestamp completed_at_from = 4;
+  //google.protobuf.Timestamp completed_at_to = 5;
+}
+
+message GetAllResponse {
+  string title = 1;
+  string description = 2;
+  Status status = 3;
+}
+
+message GetByIdRequest {
+  string id = 1;
+}
+
+message AddRequest {
+  string title = 1;
+  string description = 2;
+  Status status = 3;
+}
+
+message AddResponse {
+  string id = 1;
+}
+
+message UpdateRequest {
+  ToDoTask task = 1;
+}
+
+message DeleteRequest {
+  string id = 1;
+}
+
+service ToDoTaskService {
+  // Unary list with optional filters
+  //rpc GetAll(GetAllRequest) returns (GetAllResponse);
+
+  // Server streaming for real-time listings or large result sets
+  //rpc StreamAll(GetAllRequest) returns (stream ToDoTask);
+
+  // CRUD
+  //rpc GetById(GetByIdRequest) returns (ToDoTask);
+  rpc Add(AddRequest) returns (AddResponse);
+  //rpc Update(UpdateRequest) returns (google.protobuf.Empty);
+  //rpc Delete(DeleteRequest) returns (google.protobuf.Empty);
+}
