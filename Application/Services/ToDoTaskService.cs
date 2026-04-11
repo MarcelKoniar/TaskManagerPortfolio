@@ -30,7 +30,7 @@ namespace Application.Services
                 CompletedAt = data.CompletedAt,
                 Description = data.Description,
                 Id = data.Id,
-                Status = data.Status
+                ToDoTaskStatus = data.ToDoTaskStatus
             }: null;
         }
 
@@ -40,7 +40,7 @@ namespace Application.Services
             {
                 Title = ToDoTaskDTO.Title,
                 Description = ToDoTaskDTO.Description,
-                Status = ToDoTaskDTO.Status
+                ToDoTaskStatus = ToDoTaskDTO.ToDoTaskStatus
             };
             var created = await _ToDoTaskRepository.AddAsync(newEntity);
             return created.Id;
@@ -59,13 +59,13 @@ namespace Application.Services
                 {
                     filter = filter.And(u => u.Description.ToUpper().Contains(request.Description.ToUpper()));
                 }
-                if (request.Status != null)
+                if (request.ToDoTaskStatus != null)
                 {
-                    filter = filter.And(u => u.Status == request.Status);
+                    filter = filter.And(u => u.ToDoTaskStatus == request.ToDoTaskStatus);
                 }
-                if (request.Status != null)
+                if (request.ToDoTaskStatus != null)
                 {
-                    filter = filter.And(u => u.Status == request.Status);
+                    filter = filter.And(u => u.ToDoTaskStatus == request.ToDoTaskStatus);
                 }
 
                 if (request.CompletedAtFrom.HasValue)
@@ -82,7 +82,7 @@ namespace Application.Services
             var data = await _ToDoTaskRepository.GetWhereAsync(filter);
             return data.Select(x => new ToDoTaskDTO { 
                 Id = x.Id,
-                Status = x.Status,
+                ToDoTaskStatus = x.ToDoTaskStatus,
                 CompletedAt = x.CompletedAt,
                 Description = x.Description,
                 Title = x.Title
@@ -101,7 +101,7 @@ namespace Application.Services
                 Id = ToDoTaskDTO.Id,
                 Title = ToDoTaskDTO.Title,
                 Description = ToDoTaskDTO.Description,
-                Status = ToDoTaskDTO.Status,
+                ToDoTaskStatus = ToDoTaskDTO.ToDoTaskStatus,
                 CompletedAt = ToDoTaskDTO.CompletedAt
             };
             return _ToDoTaskRepository.UpdateAsync(entity);

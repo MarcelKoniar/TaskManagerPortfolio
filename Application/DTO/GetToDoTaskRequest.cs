@@ -9,7 +9,7 @@ namespace Application.DTO
     {
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public Status? Status { get; set; }
+        public ToDoTaskStatus? ToDoTaskStatus { get; set; }
         public DateTime? CompletedAtFrom { get; set; }
         public DateTime? CompletedAtTo { get; set; }
     }

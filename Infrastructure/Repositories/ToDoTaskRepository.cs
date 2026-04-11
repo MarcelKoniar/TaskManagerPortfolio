@@ -28,7 +28,7 @@ namespace Infrastructure.Repositories
         //        Id = user.Id,
         //        Title = user.Title,
         //        Description = user.Description,
-        //        Status = user.Status,
+        //        ToDoTaskStatus = user.ToDoTaskStatus,
         //        CompletedAt = user.CompletedAt
         //    };
         //}
@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories
         //    {   Id = Guid.NewGuid(),             
         //        Title = user.Title,
         //        Description = user.Description, 
-        //        Status = user.Status,
+        //        ToDoTaskStatus = user.ToDoTaskStatus,
         //        CompletedAt = user.CompletedAt                    
         //    });
 
@@ -53,7 +53,7 @@ namespace Infrastructure.Repositories
         //        Id = x.Id,
         //        CompletedAt = x.CompletedAt,
         //        Description = x.Description,
-        //        Status = x.Status,
+        //        ToDoTaskStatus = x.ToDoTaskStatus,
         //        Title = x.Title
         //    });
         //}

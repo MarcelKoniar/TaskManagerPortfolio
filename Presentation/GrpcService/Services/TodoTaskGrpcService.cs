@@ -26,8 +26,8 @@ namespace GrpcService.Services
             {
                 Title = request.Title ?? string.Empty,
                 Description = request.Description ?? string.Empty,
-                // Map proto Status -> application Status by numeric cast (keeps mapping stable if enums share values)
-                //Status = (Domain.Enums.Status)request.Status
+                // Map proto ToDoTaskStatus -> application ToDoTaskStatus by numeric cast (keeps mapping stable if enums share values)
+                //ToDoTaskStatus = (Domain.Enums.ToDoTaskStatus)request.ToDoTaskStatus
             };
 
             var createdId = await _appService.AddAsync(dto);

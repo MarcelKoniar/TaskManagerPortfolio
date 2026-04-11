@@ -31,7 +31,7 @@ namespace WebApi.Tests
             {
                 Title = "Test task",
                 Description = "Description test",
-                Status = Status.Pending                
+                ToDoTaskStatus = ToDoTaskStatus.Pending                
             };
 
 

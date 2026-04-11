@@ -39,9 +39,9 @@ namespace WebApi.Handlers
         {
             context.Response.StatusCode = exception switch
             {
-                ApplicationException => StatusCodes.Status400BadRequest ,
+                ApplicationException => StatusCodes.Status400BadRequest,
                 UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
-                
+
                 _ => StatusCodes.Status500InternalServerError
             };
 

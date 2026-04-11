@@ -14,7 +14,7 @@ var reply = await client.AddAsync(
     {
        Title = "Test Task",
        Description = "This is a test task",
-       Status = Status.Todo
+       ToDoTaskStatus = ToDoTaskStatus.Todo
     });
 
 Console.WriteLine("Task was created with Id: " + reply.Id);

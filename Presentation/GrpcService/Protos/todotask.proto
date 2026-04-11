@@ -11,11 +11,11 @@ message ToDoTask {
 	string id = 1;
 	string title = 2;
 	string description = 3;
-	Status status = 4;
+	ToDoTaskStatus ToDoTaskStatus = 4;
 }
 
-enum Status {
-  STATUS_UNKNOWN = 0;
+enum ToDoTaskStatus {
+  ToDoTaskStatus_UNKNOWN = 0;
   TODO = 1;
   IN_PROGRESS = 2;
   DONE = 3;
@@ -30,7 +30,7 @@ message GetAllRequest {
 message GetAllResponse {
   string title = 1;
   string description = 2;
-  Status status = 3;
+  ToDoTaskStatus ToDoTaskStatus = 3;
 }
 
 message GetByIdRequest {
@@ -40,7 +40,7 @@ message GetByIdRequest {
 message AddRequest {
   string title = 1;
   string description = 2;
-  Status status = 3;
+  ToDoTaskStatus ToDoTaskStatus = 3;
 }
 
 message AddResponse {

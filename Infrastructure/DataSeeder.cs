@@ -15,19 +15,19 @@ namespace Infrastructure
                     {
                         Title = "Task 1",
                         Description = "Description for Task 1",
-                        Status = Domain.Enums.Status.Pending
+                        ToDoTaskStatus = Domain.Enums.ToDoTaskStatus.Pending
                     },
                     new ToDoTask
                     {
                         Title = "Task 2",
                         Description = "Description for Task 2",
-                        Status = Domain.Enums.Status.InProgress
+                        ToDoTaskStatus = Domain.Enums.ToDoTaskStatus.InProgress
                     },
                     new ToDoTask
                     {
                         Title = "Task 3",
                         Description = "Description for Task 3",
-                        Status = Domain.Enums.Status.Completed
+                        ToDoTaskStatus = Domain.Enums.ToDoTaskStatus.Completed
                     }
 
                 );

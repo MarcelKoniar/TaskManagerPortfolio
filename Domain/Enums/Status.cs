@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain.Enums
 {
-    public enum Status
+    public enum ToDoTaskStatus
     {
 
         Pending = 0,
