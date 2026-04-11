@@ -38,6 +38,12 @@ if (app.Environment.IsDevelopment())
         options.RoutePrefix = string.Empty; // Swagger at root (/)
     });
 
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        context.Database.EnsureCreated();
+        await DataSeeder.SeedAsync(context);
+    }
 }
 
 app.UseHttpsRedirection();

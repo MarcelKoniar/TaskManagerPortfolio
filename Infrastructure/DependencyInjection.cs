@@ -23,12 +23,13 @@ namespace Infrastructure
                 // Use InMemory for now (tests / dev)
                 options.UseSqlite(connection);
 
-                // 👉 switch later to SQL Server / PostgreSQL
+                // Switch later to SQL Server / PostgreSQL
                 // options.UseSqlServer(
                 //     configuration.GetConnectionString("Default"));
             });
 
             services.AddScoped<IToDoTaskRepository, ToDoTaskRepository>();
+
 
             return services;
         }

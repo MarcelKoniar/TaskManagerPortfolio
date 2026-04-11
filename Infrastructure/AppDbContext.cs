@@ -29,17 +29,36 @@ namespace Infrastructure
                 // Properties
                 entity.Property(e => e.Deleted)
                       .IsRequired();
-
-                //entity.Property(e => e.CreatedBy)
-                //      .HasMaxLength(256);
-
-                //entity.Property(e => e.UpdatedBy)
-                //      .HasMaxLength(256);
             });
+        }
 
-            //modelBuilder.ApplyConfigurationsFromAssembly(
-            //    typeof(AppDbContext).Assembly
-            //);
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            //var currUser = await UserProvider.CurrentUser(); TODO: Implement user provider to get current user information         
+            var userName = "Test User";
+
+            var currentDate = DateTime.Now;
+
+            foreach (var entry in base.ChangeTracker.Entries())
+            {
+                if (entry.Entity.GetType().IsSubclassOf(typeof(BaseModel)))
+                {
+                    var model = (BaseModel)entry.Entity;
+
+                    switch (entry.State)
+                    {
+                        case EntityState.Added:
+                            model.CreatedAt = currentDate;
+                            model.CreatedBy = userName;
+                            goto case EntityState.Modified;
+                        case EntityState.Modified:
+                            model.UpdatedAt = currentDate;
+                            model.UpdatedBy = userName;
+                            break;
+                    }
+                }
+            }
+            return await base.SaveChangesAsync(true, cancellationToken).ConfigureAwait(false);
         }
     }
 
