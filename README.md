@@ -1,6 +1,6 @@
-﻿# TaskManager Portfolio - gRPC Service Solution
+﻿# TaskManager Portfolio Solution
 
-A .NET 10 multi-project solution demonstrating Clean Architecture pattern with gRPC service integration for ToDo task management.
+A .NET 10 multi-project solution demonstrating Clean Architecture pattern with REST API and gRPC service integration for ToDo task management.
 
 ## Project Structure
 
@@ -41,7 +41,7 @@ Expose business logic via user-facing interfaces (REST API and gRPC in this case
   - Implements proto-generated base class `ToDoTaskService.ToDoTaskServiceBase`.
   - RPC methods: `GetById`, `Add`, `Update`, `Delete`.
   - Adapts proto messages (`AddRequest`, `ToDoTask`, etc.) ↔ application DTOs.
-  - ToDo Handles validation, error mapping to gRPC statuses (InvalidArgument, NotFound, Internal), all CRUD operations.
+  - ToDo: Handles validation, error mapping to gRPC statuses (InvalidArgument, NotFound, Internal), implement all CRUD operations.
   - Injects and calls `IToDoTaskService` from Application layer.
 
 - **Protos/todotask.proto:**
@@ -55,6 +55,7 @@ Expose business logic via user-facing interfaces (REST API and gRPC in this case
   - Creates channel to `https://localhost:5001`.
   - Calls RPC methods (e.g., `AddAsync`).
   - Prints results. 
+  - ToDo: Implement calls to all CRUD operations.
 
 #### **WebApi** (REST API Server)
 
