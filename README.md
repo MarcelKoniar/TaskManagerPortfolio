@@ -4,14 +4,14 @@ A .NET 10 multi-project solution demonstrating Clean Architecture pattern with R
 
 ## Project Structure
 
-### 1. **Domain Layer** (`Domain/`)
+### 1. **Domain Layer**
 Define core business entities and value types independent of technology.
 
 - **EntityModels:** `ToDoTask`.
 - **Enums:** `ToDoTaskStatus` enum (TODO=1, IN_PROGRESS=2, DONE=3...).
 - **No dependencies:** Pure C#, no EF Core, no gRPC.
 
-### 2. **Application Layer** (`Application/`)
+### 2. **Application Layer**
 Implement business logic, coordinate between presentation and infrastructure, define contracts.
 
 - **Interfaces:** `IToDoTaskService` — business operations (list, fetch, create, update, delete).
@@ -20,7 +20,7 @@ Implement business logic, coordinate between presentation and infrastructure, de
 - **DI:** `AddApplication()` registers services in the container.
 - **Dependencies:** Domain Layer.
 
-### 3. **Infrastructure Layer** (`Infrastructure/`)
+### 3. **Infrastructure Layer**
 Handle data persistence, database context, repository pattern.
 
 - **Repositories:** `IToDoTaskRepository` implementation using EF Core; methods: `GetByIdAsync`, `AddAsync`, `GetWhereAsync`, `UpdateAsync`, `DeleteByIdAsync`.
@@ -28,7 +28,7 @@ Handle data persistence, database context, repository pattern.
 - **DI:** `AddInfrastructure()` registers repositories and DbContext.
 - **Dependencies:** Domain Layer, Application Layer, ORM (EF Core NuGet packages).
 
-### 4. **Presentation Layer** (`Presentation/`)
+### 4. **Presentation Layer**
 Expose business logic via user-facing interfaces (REST API and gRPC in this case).
 
 #### **GrpcService** (Server)
