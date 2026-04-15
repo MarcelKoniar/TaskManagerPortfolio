@@ -49,7 +49,7 @@ namespace Infrastructure
                     {
                         case EntityState.Added:
                             model.CreatedAt = currentDate;
-                            model.CreatedBy = userName;
+                            model.CreatedBy = userName;                           
                             goto case EntityState.Modified;
                         case EntityState.Modified:
                             model.UpdatedAt = currentDate;

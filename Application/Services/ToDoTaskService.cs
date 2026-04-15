@@ -40,7 +40,7 @@ namespace Application.Services
             {
                 Title = toDoTaskDTO.Title,
                 Description = toDoTaskDTO.Description,
-                ToDoTaskStatus = toDoTaskDTO.ToDoTaskStatus
+                ToDoTaskStatus = toDoTaskDTO?.ToDoTaskStatus != null ? toDoTaskDTO.ToDoTaskStatus : Domain.Enums.ToDoTaskStatus.Pending,
             };
             var created = await _toDoTaskRepository.AddAsync(newEntity);
             return created.Id;

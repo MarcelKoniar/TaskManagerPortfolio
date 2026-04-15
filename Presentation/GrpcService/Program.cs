@@ -6,10 +6,13 @@ using Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddGrpc();
-
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
+
+builder.Services.AddGrpc().AddJsonTranscoding(); ;
+builder.Services.AddGrpcSwagger();
+builder.Services.AddSwaggerGen();
+
 
 builder.WebHost.ConfigureKestrel(options =>
 {
@@ -22,6 +25,19 @@ builder.WebHost.ConfigureKestrel(options =>
 
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    context.Database.EnsureCreated();
+    await DataSeeder.SeedAsync(context);
+}
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "gRPC API V1");
+});
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<ToDoTaskGrpcService>();

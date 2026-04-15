@@ -5,32 +5,38 @@ option csharp_namespace = "GrpcService";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+//import "google/api/http.proto";
 
 message ToDoTask {
   // GUID as string (use consistent formatting on server/client)
 	string id = 1;
 	string title = 2;
 	string description = 3;
-	ToDoTaskStatus ToDoTaskStatus = 4;
+	ToDoTaskStatus toDoTaskStatus = 4;
+	google.protobuf.Timestamp completedAt = 5;
 }
 
 enum ToDoTaskStatus {
-  ToDoTaskStatus_UNKNOWN = 0;
-  TODO = 1;
-  IN_PROGRESS = 2;
-  DONE = 3;
+  Pending = 0;
+  InProgress = 1;
+  Completed = 2;
+  Cancelled = 3;
 }
 
 message GetAllRequest {
-
-  //google.protobuf.Timestamp completed_at_from = 4;
-  //google.protobuf.Timestamp completed_at_to = 5;
+  string title = 1;
+  string description = 2;
+  ToDoTaskStatus toDoTaskStatus = 3;
+  google.protobuf.Timestamp completed_at_from = 4;
+  google.protobuf.Timestamp completed_at_to = 5;
 }
 
 message GetAllResponse {
-  string title = 1;
-  string description = 2;
-  ToDoTaskStatus ToDoTaskStatus = 3;
+  //string title = 1;
+  //string description = 2;
+  //ToDoTaskStatus ToDoTaskStatus = 3;
+  repeated ToDoTask tasks = 1;
 }
 
 message GetByIdRequest {
@@ -40,7 +46,7 @@ message GetByIdRequest {
 message AddRequest {
   string title = 1;
   string description = 2;
-  ToDoTaskStatus ToDoTaskStatus = 3;
+  ToDoTaskStatus toDoTaskStatus = 3;
 }
 
 message AddResponse {
@@ -57,14 +63,27 @@ message DeleteRequest {
 
 service ToDoTaskService {
   // Unary list with optional filters
-  //rpc GetAll(GetAllRequest) returns (GetAllResponse);
+  rpc GetAll(GetAllRequest) returns (GetAllResponse)
+  {
+	option (google.api.http) = {
+      get: "/Get"
+    };
+  }
 
   // Server streaming for real-time listings or large result sets
   //rpc StreamAll(GetAllRequest) returns (stream ToDoTask);
 
   // CRUD
   //rpc GetById(GetByIdRequest) returns (ToDoTask);
-  rpc Add(AddRequest) returns (AddResponse);
+  rpc Add(AddRequest) returns (AddResponse)
+  {
+	
+    option (google.api.http) = {
+      post: "/Add"
+	  body: "*"
+    };
+
+  }
   //rpc Update(UpdateRequest) returns (google.protobuf.Empty);
   //rpc Delete(DeleteRequest) returns (google.protobuf.Empty);
 }
